@@ -3,6 +3,7 @@
 import pygame
 import random
 from Snake import Snake
+from Thinker import Thinker
 pygame.init()
 
 # define colors
@@ -15,6 +16,8 @@ YELLOW = (255, 255, 0)
 size = (500, 500)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Brain Snake")
+
+thinker = Thinker()
 
 newGame = True
 while newGame:
@@ -45,15 +48,7 @@ while newGame:
                 playing = False
                 newGame = False
 
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT] and direction != 'R':
-            direction = 'L'
-        elif keys[pygame.K_RIGHT] and direction != 'L':
-            direction = 'R'
-        elif keys[pygame.K_UP] and direction != 'D':
-            direction = 'U'
-        elif keys[pygame.K_DOWN] and direction != 'U':
-            direction = 'D'
+        direction = thinker.getDirection()
 
         player.update(direction)
 
