@@ -10,8 +10,8 @@ class Thinker(object):
         self.states = [line.rstrip('\n') for line in open('states')]
         for i in range(0, len(self.states)):
             self.states[i] = self.states[i].split(',')
-        self.rando = 950
-        self.rate = 0.0005
+        self.rando = 50
+        self.rate = 0.0001
         self.moveset = ['U', 'D', 'L', 'R']
 
     def getDirect(self, goalX, goalY, snake, direction):

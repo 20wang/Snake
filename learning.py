@@ -102,7 +102,7 @@ while newGame and coins < 1000:
 
     metadata.append([str(coins), str(score)])
 
-f = open('metadata', 'w')
+f = open('metadata2000', 'w')
 for line in metadata:
     f.write(','.join(line) + '\n')
 f.close()
