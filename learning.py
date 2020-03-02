@@ -19,9 +19,11 @@ pygame.display.set_caption("Brain Snake")
 
 thinker = Thinker()
 
+metadata = []
+
 newGame = True
-coins = 1000
-while newGame and coins > 0:
+coins = 0
+while newGame and coins < 1000:
     all_sprites_list = pygame.sprite.Group()
 
     player = Snake(GREEN)
@@ -93,9 +95,15 @@ while newGame and coins > 0:
         clock.tick(99999)
 
     thinker.record()
-    coins -= 1
+    coins += 1
 
     print()
-    print('-------- GAME OVER --------')
-    print('your score: ' + str(score))
+    print('game ' + str(coins) + ' score: ' + str(score))
+
+    metadata.append([str(coins), str(score)])
+
+f = open('metadata', 'w')
+for line in metadata:
+    f.write(','.join(line) + '\n')
+f.close()
 

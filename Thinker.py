@@ -1,7 +1,6 @@
 import pygame
 from Snake import Snake
 from random import randint
-from random import choice
 
 
 class Thinker(object):
@@ -71,16 +70,16 @@ class Thinker(object):
 
         r = randint(0, 1000)
         if self.rando > r or state == []:
-            return self.moveset[randint(0, 3)]
+            m = randint(1, 4)
+            self.moves.append([encoded, m])
+            return self.moveset[m - 1]
         if self.rando > 50:
             self.rando -= 1
 
         maximum = 1
-        for v in range(2, 5):
-            if state[v] > state[maximum]:
+        for v in range(1, 5):
+            if float(state[v]) > float(state[maximum]):
                 maximum = v
-            if state[v] == state[maximum]:
-                maximum = choice[v, maximum]
 
         direct = self.moveset[maximum - 1]
 
@@ -106,14 +105,12 @@ class Thinker(object):
 
         for m in self.moves:
             self.states.append([m[0], 0.0, 0.0, 0.0, 0.0])
-            self.states[len(self.states) - 1] += score * self.rate
+            self.states[len(self.states) - 1][m[1]] = score * self.rate
             self.moves.remove(m)
-
-        if self.moves != []:
-            print('Something has gone terribly wrong.')
 
     def record(self):
         f = open('states', 'w')
+        print(self.states)
         for line in self.states:
             l = []
             for x in line:
