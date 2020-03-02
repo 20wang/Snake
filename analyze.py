@@ -1,3 +1,7 @@
+#
+# 5-10-2018
+__author__ = 'Shan Wang'
+
 import matplotlib.pyplot as plt
 import numpy as np
 

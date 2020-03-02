@@ -29,6 +29,7 @@ while newGame:
 
     score = 0
 
+    # create food
     working = True
     while working:
         x = random.randint(0, 24) * 20
@@ -39,12 +40,14 @@ while newGame:
     newY = y
     add = False
 
+    # closing window ends the program
     while playing:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 playing = False
                 newGame = False
 
+        # get user input
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT] and direction != 'R':
             direction = 'L'
@@ -77,6 +80,7 @@ while newGame:
             newY = y
             add = True
 
+            # create new food
             working = True
             while working:
                 x = random.randint(0, 24) * 20

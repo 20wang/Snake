@@ -4,16 +4,18 @@ from random import randint
 
 
 class Thinker(object):
-    def __init__(self):
-        #super.__init__(self)
+
+    # class constructor
+    def __init__(self, rando, rate):
         self.moves = []
         self.states = [line.rstrip('\n') for line in open('states')]
         for i in range(0, len(self.states)):
             self.states[i] = self.states[i].split(',')
-        self.rando = 50
-        self.rate = 0.0001
+        self.rando = rando
+        self.rate = rate
         self.moveset = ['U', 'D', 'L', 'R']
 
+    # gets a direction based on current state
     def getDirect(self, goalX, goalY, snake, direction):
         direct = 'U'
         posX = snake[len(snake) - 1].x
@@ -86,6 +88,7 @@ class Thinker(object):
         self.moves.append([encoded, maximum])
         return direct
 
+    # converts direction, food position, obstacles to a string
     def encode(self, data):
         encoded = ""
         encoded += data[0]
@@ -96,6 +99,7 @@ class Thinker(object):
                 encoded += 'F'
         return encoded
 
+    # applies success/failure score to entry in states
     def learn(self, score):
         for state in self.states:
             for move in self.moves:
@@ -108,9 +112,9 @@ class Thinker(object):
             self.states[len(self.states) - 1][m[1]] = score * self.rate
             self.moves.remove(m)
 
+    # records states in a text file
     def record(self):
         f = open('states', 'w')
-        print(self.states)
         for line in self.states:
             l = []
             for x in line:
