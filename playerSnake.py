@@ -1,9 +1,10 @@
-# much assistance from here: https://www.101computing.net/getting-started-with-pygame/
+# version of Snake controlled by a player
+# 3-3-2020
+__author__ = '20wang'
 
 import pygame
 import random
-from Snake import Snake
-from Thinker import Thinker
+from snake import Snake
 pygame.init()
 
 # define colors
@@ -17,13 +18,8 @@ size = (500, 500)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Brain Snake")
 
-thinker = Thinker(50, 0.0001)
-
-metadata = []
-
 newGame = True
-coins = 0
-while newGame and coins < 1000:
+while newGame:
     all_sprites_list = pygame.sprite.Group()
 
     player = Snake(GREEN)
@@ -46,22 +42,22 @@ while newGame and coins < 1000:
     newY = y
     add = False
 
-    # terminate program if window closed
+    # closing window ends the program
     while playing:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 playing = False
                 newGame = False
 
-        # get input from Q-learning algorithm
-        direct = thinker.getDirect(x, y, player.snake, direction)
-        if direct == 'L' and direction != 'R':
+        # get user input
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_LEFT] and direction != 'R':
             direction = 'L'
-        elif direct == 'R' and direction != 'L':
+        elif keys[pygame.K_RIGHT] and direction != 'L':
             direction = 'R'
-        elif direct == 'U' and direction != 'D':
+        elif keys[pygame.K_UP] and direction != 'D':
             direction = 'U'
-        elif direct == 'D' and direction != 'U':
+        elif keys[pygame.K_DOWN] and direction != 'U':
             direction = 'D'
 
         player.update(direction)
@@ -70,7 +66,6 @@ while newGame and coins < 1000:
             player.add(newX, newY)
             add = False
 
-        # draw everything
         screen.fill(BLACK)
 
         pygame.draw.rect(screen, YELLOW, [x, y, 20, 20])
@@ -81,7 +76,6 @@ while newGame and coins < 1000:
 
         if player.checkLose():
             playing = False
-            thinker.learn(-10)
 
         if player.checkWin(x, y):
             newX = x
@@ -95,21 +89,9 @@ while newGame and coins < 1000:
                 y = random.randint(0, 24) * 20
                 working = player.checkWin(x, y)
             score += 1
-            thinker.learn(10)
 
-        clock.tick(99999)
-
-    thinker.record()
-    coins += 1
+        clock.tick(10)
 
     print()
-    print('game ' + str(coins) + ' score: ' + str(score))
-
-    metadata.append([str(coins), str(score)])
-
-# write results to text file
-f = open('metadata', 'w')
-for line in metadata:
-    f.write(','.join(line) + '\n')
-f.close()
-
+    print('-------- GAME OVER --------')
+    print('your score: ' + str(score))

@@ -1,5 +1,9 @@
-import pygame
-from Snake import Snake
+# makes moves and learns new states using Q-learning
+# 3-3-2020
+__author__ = '20wang'
+
+# much assistance from here: https://towardsdatascience.com/q-learning-54b841f3f9e4
+
 from random import randint
 
 

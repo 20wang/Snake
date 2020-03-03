@@ -1,9 +1,11 @@
-# much assistance from here: https://www.101computing.net/getting-started-with-pygame/
+# a version of Q-learning snake slow enough for the user to watch
+# 3-3-2020
+__author__ = '20wang'
 
 import pygame
 import random
-from Snake import Snake
-from Thinker import Thinker
+from snake import Snake
+from thinker import Thinker
 pygame.init()
 
 # define colors

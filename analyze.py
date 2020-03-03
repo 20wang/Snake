@@ -1,6 +1,6 @@
-#
-# 5-10-2018
-__author__ = 'Shan Wang'
+# creates a graph of game results
+# 3-3-2020
+__author__ = '20wang'
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -26,7 +26,7 @@ for line in file2:
 
 fig = plt.figure()
 
-plt.xticks(np.arange(int(min(pltX)), int(max(pltX)) + 1, 100))
+plt.xticks(np.arange(int(min(pltX)), int(max(pltX)) + 1, 250))
 plt.title('Results for 2000 Games')
 plt.xlabel('Game')
 plt.ylabel('Score')

@@ -1,4 +1,8 @@
-from Body import Body
+# object that represents a snake (a list of Body objects)
+# 3-3-2020
+__author__ = '20wang'
+
+from body import Body
 import pygame
 WHITE = (255, 255, 255)
 
