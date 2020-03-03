@@ -19,7 +19,7 @@ size = (500, 500)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Brain Snake")
 
-thinker = Thinker(0, 0)
+thinker = Thinker(0, 0.00005)
 
 metadata = []
 
